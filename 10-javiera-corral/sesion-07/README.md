@@ -1,7 +1,38 @@
 # sesión 07 - 15/05
 
+LOOPS, WHILE,& FOR 
+--
+LOOP:
+--
+Es una estructura de control que permite ejecutar
+un bloque de instrucciones de manera repetida
+mientras se cumpla una condición específica o
+hasta que se alcance un estado determinado.
 
+WHILE (3 elementos)
+--
+Los bucles while son útiles para repetir
+instrucciones mientras una condición sea
+verdadera. Son como sentencias if que se repite.
 
+while (condición booleana) {
+si es true ejecuta este código en BUCLE}
+
+```
+//Ejemplo:
+While (x <= height) {
+x=x+1 }
+```
+
+Ejemplo:
+Mientras (x sea menor o igual
+que el alto de mi lienzo) {
+x incrementará 1 cada vez }
+
+como agregar codidos(agregar 3 comilla que vas hacia el otro lado) al inicio y final del codigo que voy a copiar)
+--
+
+```
 function setup() {
   createCanvas(400, 400);
 }
@@ -18,9 +49,9 @@ function draw() {
   }
 
 }
+``` 
 
-
-
+```
 function setup() {
   createCanvas(400, 400);
   noFill();
@@ -49,3 +80,121 @@ function draw() {
     diametro = diametro - opArt; 
   }
 }
+```
+
+for (4 elementos)
+--
+for (inicialización variable; condición booleana; actualización){
+Lo que queremos que pase cuando la condición sea verdadera
+}
+
+```
+for (let x=0 ; x <= width; x=x+1) {
+ellipse (x , 200, random(300))
+}
+```
+
+Una forma de repetir un bloque de código cuando se conoce el número
+de iteraciones. Los bucles `for` son útiles para repetir instrucciones un
+número determinado de veces.
+Son una especie de SHORTCUT para hacer loops y siempre tienen 4
+elementos:
+
+1. Inicialización de una variable
+2. Condición booleana (V-F)
+3. Actualización ( Incrementación o decrementación)
+4. Lo que queremos que pasé cuando la condición sea TRUE
+
+```
+function setup() {
+  createCanvas(400, 400);
+}
+
+function draw() {
+  background(127, 221, 233);
+
+  /*
+  let x=0;
+  
+  while(x < width){ 
+    fill(233,127,168);
+    ellipse(x,200,50);
+    x=x+30;
+  }
+  */
+
+//declaro condición 
+  for (let x = 0; x < width; x = x + 30) {
+    fill(233, 127, 168);
+    ellipse(x, 200, 50);
+  // for: cuando x sea igual a 0; x sea menor que width; x sea igual a x más 30. se rellenan circulos en x, 200, 50
+  }
+}
+```
+
+   ejercicio mini en clase
+   -- 
+   hacer los circulos horizontlates en vertical 
+   <img width="552" height="546" alt="image" src="https://github.com/user-attachments/assets/da4a6f12-32de-416e-8ee7-8675e01d22c3" />
+
+ ```
+   function setup() {
+  createCanvas(400, 400);
+  frameRate(10)
+}
+
+function draw() {
+  background(220);
+
+for (let y = 0; y < width; y = y + 30) {
+    fill(random(255), random(255), random(255));
+    ellipse(200, y, random(100));
+  }
+
+}
+```
+
+
+NESTED LOOPS
+--
+Un loop dentro de otro loop (tecnicamente un for dentro de un for) utilizado para crear dos condiciones for en un solo loops simultaneamente 
+
+for (inicialización variable; condición booleana; actualización){
+Lo que queremos que pase cuando la condición sea verdadera
+for (inicialización variable; condición booleana; actualización){
+}
+Lo que queremos que pase cuando la condición sea verdadera
+}
+
+```
+for (let x=0 ; x <= width; x=x+25) {
+
+for (let y=0 ; y <= height; y=y+25) {
+fill (0, 0, 255);
+ellipse (x , y, 15);
+}
+}
+```
+
+Ejemplo p5:
+
+```
+function setup() {
+  createCanvas(400, 400);
+  frameRate(24);
+}
+
+function draw() {
+  background(0);
+
+  for (let x = 0; x < width; x = x + 25) {
+    for (let y = 0; y < height; y = y + 25) {
+      fill(0, 0, 255);
+      ellipse(x, y, 15);
+    }
+  }
+}
+
+// Agregar valores Random en color y ellipse para movimiento 
+// Agregar mouseX y mouseY
+```
