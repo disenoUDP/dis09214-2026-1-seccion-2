@@ -76,7 +76,7 @@ Lo que queremos que pase cuando la condición sea verdadera
 
 # NESTED LOOPS
 
-Los **nested loops** son loops dentro de otros loops.
+Los nested loops son loops dentro de otros loops.
 
 Por ejemplo: un for dentro de otro for.
 
