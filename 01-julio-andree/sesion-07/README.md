@@ -26,5 +26,5 @@ for (let y = 0; y <= width; y = y + 25) {
     }  
 }```  
 Se ejecuta primero el segundo loop hasta que se cumpla la condición, luego hace el primer loop nuevamente.  
-
-
+### FrameCount  
+Variable númerica que cuenta la cantidad de fps desde que comenzó el boceto.  
