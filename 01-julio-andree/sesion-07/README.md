@@ -12,5 +12,15 @@ Forma de repetir un bloque de código
 For(inicialización variable; condición booleana; actualización){lo que queremos que pase cuando la condición sea verdadera};  
 Ej. ```For (let x=0; x<= width, x=x+1){ellipse (x,200,random(300))}```  
 {}: todo lo que esté en las llaves es lo que se va a repetir.  
+### Nested Loop  
+Un for dentro de otro for. Nos sirve para rellenar toda la pantalla sin necesidad de hacer mas líneas de codigo por separado.  
+For  
+Ej. ```for (let x = 0; x <= width; x = x + 25) {  
+for (let y = 0; y <= width; y = y + 25) {  
+    fill(233, 127, 168);  
+    ellipse(x, y, 50);  
+    }  
+}```  
+Se ejecuta primero el segundo loop hasta que se cumpla la condición, luego hace el primer loop nuevamente.  
 
 
