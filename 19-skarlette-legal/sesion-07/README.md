@@ -23,3 +23,18 @@ for(inicializacion de la variable; condicion booleana; actualizacion){lo que que
 for (let x= 0 ; x<=width ; x=x+1)
 {ellipse (x,200,random(300)}
 
+## Nested loops
+
+* Son loops dentro de otro loops
+* Es decir un *for* dentro de otro *for*
+´´´´Javascrip
+
+## REFERENTES
+
+**https://mateoarce.cl/**
+
+##frameCount
+
+variable numerico que regustra la catidad de fotogragramas, se incrementa 1 cada vez  en fuction draw, y 0 en setup.
+
+* sirve para ciertas animaciones o estados, 
