@@ -1,6 +1,6 @@
 # sesión 07 - 15/05
 
-LOOPS, WHILE,& FOR 
+LOOPS, WHILE & FOR 
 --
 LOOP:
 --
@@ -176,7 +176,9 @@ ellipse (x , y, 15);
 }
 ```
 
-Ejemplo p5:
+Ejemplo de Nested Loop:
+--
+<img width="522" height="522" alt="image" src="https://github.com/user-attachments/assets/7273f5fb-7f41-4df3-9e86-6841d6a6d13f" />
 
 ```
 function setup() {
