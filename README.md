@@ -1,2 +1,4 @@
 # dis09214-2026-1-seccion-2
-DIS09214 Pensamiento computacional sección 5, primer semestre 2026
+Repositorio del curso DIS09214 pensamiento computacional, sección 2. Sala R180.-1.L13.
+
+Esta sección es impartida por profesora Paulina Mujica, en conjunto con ayudante Janis Sepúlveda.
