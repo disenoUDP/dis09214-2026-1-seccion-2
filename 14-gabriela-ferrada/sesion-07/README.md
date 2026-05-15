@@ -15,9 +15,9 @@
 
 **Sintaxis** ----> while (condición booleana){si es true ejecuta este co´digo en BUCLE}
 
-EJEMPLO:  Mientras (x es menor o igual que el alto de mi lienzo){x incrementára 1 cada vez}
+#### EJEMPLO:  Mientras (x es menor o igual que el alto de mi lienzo){x incrementára 1 cada vez}
 
-¨¨javascript¨¨----> eso es par que el codigo este ordenado 
+- ¨¨javascript¨¨----> eso es para que el codigo este ordenado 
 
 -------------------------------
 
@@ -33,9 +33,10 @@ EJEMPLO:  Mientras (x es menor o igual que el alto de mi lienzo){x incrementára
  
   **Sintaxis** ----> for(inicialización variable; condición booleana; actualización){Lo que queremos que pase cuando la condición sea verdadera}
 
-  #### EJEMPLO: for (let x=0 ; x <= width; x=x+1) {
-                ellipse (x , 200, random(300))
-                }
+  #### EJEMPLO:
+                 for (let x=0 ; x <= width; x=x+1) {
+                 ellipse (x , 200, random(300))
+                 }
 
 ---------------------------
 
@@ -53,7 +54,10 @@ Lo que queremos que pase cuando la condición sea verdadera
 }
 
 ---------------------------------
+# FRAME COUNT ( viene integrada en p5js)
 
-- Para la solemne 2 , esta permitido ocupar IA, Si ocupamos algo nuevo que ocupamo gracias a la IA , hay que explicar coomo funciona y como lo ocupabamos,TENEMOS QUE PRESENTAR
-- Primero hacer EL DIAGRAMA DE FLUJO para visualizar nuestra idea, pensar en la problematica primero.
-- Ojo con las figuras y elementos, algo que visualmente se vea bien , podemos ocupar diseños que tengamos en ilustrator o photoshop  pegarlo como PNG.
+- Variable numérica que registra la cantidad de fotogramas dibujados desde que comenzó el boceto. El
+valor de **frameCount** es 0 dentro de **setup()**. Se **incrementa** en 1 cada vez que finaliza la ejecución del código en **draw()**.
+- Para la solemne 2 , esta permitido ocupar IA, Si ocupamos algo nuevo gracias a la IA , hay que explicar coomo funciona y como lo ocupabamos,TENEMOS QUE PRESENTAR
+- Primero hacer EL DIAGRAMA DE FLUJO para visualizar nuestra idea, pensar en la problemática primero.
+- Ojo con las fíguras y elementos, algo que visualmente se vea bien , podemos ocupar diseños que tengamos en ilustrator o photoshop  pegarlo como PNG.
