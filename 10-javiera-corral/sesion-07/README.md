@@ -200,3 +200,39 @@ function draw() {
 // Agregar valores Random en color y ellipse para movimiento 
 // Agregar mouseX y mouseY
 ```
+Segundo ejemplo:
+```
+function setup() {
+  createCanvas(400, 400);
+  frameRate(24);
+  colorMode(HSB); // Hue - Saturación - Brillo (mas facil de trabajar)
+  frameRate(9);
+}
+
+function draw() {
+  background(0);
+
+  let cambioHue = map(mouseX, 0, 400, 0, 360);
+  let cambioSat = map(mouseY, 0, 400, 0, 360);
+
+  background(cambioHue, cambioSat, 100);
+
+  if (mouseIsPressed) {
+    background(0, 0, 100);
+  }
+
+  for (let x = 0; x < width; x = x + 25) {
+    for (let y = 0; y < height; y = y + 25) {
+      fill(random(360), 80, 100);
+      ellipse(x, y, random(20));
+    }
+  }
+}
+
+function mouseReleased() {
+  fill(255, 0, 0);
+  ellipse(mouseX, mouseY, random(400));
+}
+
+// Agregar mouseX y mouseY
+```
