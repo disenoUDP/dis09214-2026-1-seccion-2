@@ -10,5 +10,7 @@ Ej.  ```While(x sea menor o igual que el alto de mi lienzo){x incrementará en 1
 ### For  
 Forma de repetir un bloque de código  
 For(inicialización variable; condición booleana; actualización){lo que queremos que pase cuando la condición sea verdadera};  
-Ej. ```For (let x=0; x<= width, x=x+1){ellipse (x,200,random(300))}``` 
+Ej. ```For (let x=0; x<= width, x=x+1){ellipse (x,200,random(300))}```  
+{}: todo lo que esté en las llaves es lo que se va a repetir.  
+
 
