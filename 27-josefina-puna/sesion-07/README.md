@@ -49,3 +49,88 @@ Son una especie de SHORTCUT para hacer loops y siempre tienen 4 elementos:
 for(inicializacion variable;condiciíon booleana;actualizacion){  
 Lo que queremos que pase cuando la condición sea verdadera}  
 
+```
+function setup() {
+  createCanvas(400, 400);
+  frameRate(10);
+}
+
+function draw() {
+  background(127, 221, 233);
+
+  /*
+  let x=0;
+
+  while(x < width){ 
+    fill(233,127,168);
+    ellipse(x,200,50);
+    x=x+30;
+  }
+  */
+
+  //for (let x = 0; x < width; x = x + 30) {
+   // fill(random(255), random(255), random(255));
+    //ellipse(x, 200, random(100));
+  //}
+  
+  for (let y = 0 ; y < width; y = y + 30) {
+    fill(random(225), random(225), random(225));
+    ellipse(200, y, random(100));
+  }
+}
+```
+### nested loop  
+Es un for dentro de otro for  
+for (inicialización variable; condición booleana; actualización){  
+
+Lo que queremos que pase cuando la condición sea verdadera  
+
+for (inicialización variable; condición booleana; actualización){  
+}  
+Lo que queremos que pase cuando la condición sea verdadera  
+}  
+```
+function setup() {
+  createCanvas(400, 400);
+  frameRate(24);
+}
+
+function draw() {
+  background(0);
+
+  for (let x = 0; x <= width; x = x + 25) {
+    for (let y = 0; y <= height; y = y + 25) {
+      fill(random(225), random(225), random(mouseY));
+      ellipse(x, y, 15);
+    }
+  }
+}
+
+// Agregar valores Random en color y ellipse para movimiento 
+// Agregar mouseX y mouseY  
+```
+
+```
+function setup() {
+  createCanvas(400, 400);
+  noLoop(); // Solo dibuja una vez al inicio
+}
+
+function draw() {
+  background(255);
+  
+  let size = 50; // Variable para el tamaño de cada cuadrado de la cuadrícula
+  
+  for (let x = 0; x < width; x = x+size) {
+    for (let y = 0; y < height; y += size) {
+      fill(random(255), random(255), random(255));
+      rect(x, y, size, size);
+    }
+  }
+}
+
+function mousePressed() {
+  // Cambia los colores cada vez que hago clic
+  redraw();
+}
+```
