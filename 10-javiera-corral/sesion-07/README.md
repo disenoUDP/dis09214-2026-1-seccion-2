@@ -236,3 +236,49 @@ function mouseReleased() {
 
 // Agregar mouseX y mouseY
 ```
+
+frameCount
+--
+Variable numérica que registra la
+cantidad de fotogramas dibujados
+desde que comenzó el boceto. El
+valor de `frameCount` es 0 dentro
+de `setup()`. Se incrementa en 1
+cada vez que finaliza la ejecución del
+código en `draw()`.
+
+Ejemplo:
+
+<img width="536" height="533" alt="image" src="https://github.com/user-attachments/assets/465277f7-feed-477c-89c1-6acfe1f74eef" />
+<img width="541" height="545" alt="image" src="https://github.com/user-attachments/assets/16d86e13-77ba-4416-b3d4-bc6086e7c33f" />
+
+``` 
+function setup() {
+  createCanvas(400, 400);
+}
+
+function draw() {
+  background(0);
+
+  print(frameCount);
+  
+  if ((frameCount <= 180)) {
+    background(130, 237, 75);
+    textSize(50);
+    textAlign(CENTER, CENTER);
+    text("HOLA"+"\n ¿Cómo estay?", 200, 200);
+  }
+  else {
+    background(237,75,211); 
+    textSize(100);
+    textAlign(CENTER, CENTER);
+    text("CHAO", 200, 200);
+  }
+  
+  if(mouseIsPressed){
+    frameCount = 0;
+  }
+}
+```
+
+
