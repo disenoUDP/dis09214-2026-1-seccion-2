@@ -45,7 +45,8 @@ function draw() {
   while(x < width){ //while significa mientras. mientras X sea menor que el width de el canvas 
     fill(233,127,168); // relleno del circulo 
     ellipse(x,200,50);  // se crea un circulo en en x, 200 de tamaño 50
-    x=x+30; // pero luego el valor de X amuneta a en 30 cada vez que el loop se repita. tecnicamente el loop de while termina cuando x sea igual o mayor que width 
+    x=x+30; // pero luego el valor de X amuneta a en 30 cada vez que el loop se repita.
+    tecnicamente el loop de while termina cuando x sea igual o mayor que width 
   }
 
 }
