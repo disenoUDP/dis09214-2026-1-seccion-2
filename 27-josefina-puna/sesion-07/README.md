@@ -134,3 +134,33 @@ function mousePressed() {
   redraw();
 }
 ```
+### frameCount  
+Variable numérica que registra la cantidad de fotogramas dibujados desde que comenzó el boceto. El valor de `frameCount` es 0 dentro de `setup()`. Se incrementa en 1 cada vez que finaliza la ejecución del código en `draw()`.  
+```
+function setup() {
+  createCanvas(400, 400);
+}
+
+function draw() {
+  background(0);
+
+  print(frameCount);
+  
+  if ((frameCount <= 180)) {
+    background(130, 237, 75);
+    textSize(50);
+    textAlign(CENTER, CENTER);
+    text("HOLA"+"\n ¿Cómo estay?", 200, 200);
+  }
+  else {
+    background(237,75,211); 
+    textSize(100);
+    textAlign(CENTER, CENTER);
+    text("CHAO", 200, 200);
+  }
+  
+  if(mouseIsPressed){
+    frameCount = 0;
+  }
+}  
+```
