@@ -45,6 +45,10 @@ Un loop dentro de otro loop
 
 *Un for dentro de otro for*
 
+****frameCount****
+
+Variable numérica que registra la cantidad de fotogramas dibujados desde que comenzó el boceto. El valor de `frameCount` es 0 dentro de `setup()`. Se incrementa en 1 cada vez que finaliza la ejecución del código en `draw()`.
+
 
 
 
