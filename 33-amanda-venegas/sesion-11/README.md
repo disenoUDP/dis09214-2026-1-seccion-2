@@ -113,377 +113,301 @@ Universitat Oberta de Catalunya. (2023, 22 de marzo). Mansplaining, manspreading
 
 ---
 ### Mi codigo p5js : https://editor.p5js.org/amanda.venegas1/sketches/HXfX3WCua
+### correccion de mi codigo : https://editor.p5js.org/amanda.venegas1/sketches/dObnXFG0l
 ---
 
 
-### Mi codigo 
+### Mi codigo nuevo 
 
-``` let imagenFondo;
+```
+// Estas son variables para guardar las imágenes y el sonido
+let imagenFondo;
 let chicaI;
 let chicoI;
 let enojoI;
 let imagenReinicio;
-let estado = 0;
-let click = 0; 
-let rojo; 
+let estado = 0; // Controla las pantallas del juego (0: Inicio, 1: Instrucciones, 2: Juego)
+let click = 0; // Cuenta cuántas veces el usuario hace clic 
+let rojo; // Variable de color rojo después usada en el map
 let miSonido;
-let desplazamientoMujer = 7;
 
-// 9. ARRAY asignado para guardar las partículas creadas por la clase
-let particulas = []; 
+let particulas = []; // Arreglo asignado para guardar las partículas creadas por la clase
 
-// Variables dinámicas para las posiciones de los personajes
-let chico, chica;
+// Declare y agrupe variables 
+let chico = { // Todas las variables del chico 
+  x: 1140, // Posición de la imagen del chico en X
+  y: 550, // Posición de la imagen del chico en Y          
+  ancho: 450, // Tamaño del ancho de la imagen
+  alto: 550, // Tamaño del alto de la imagen
+  piernaD: 1170, // Posición de la pierna derecha
+  piernaI: 1040, // Posición de la pierna izquierda  
+  tamPierna: 90 // Tamaño del ancho de las piernas
+};
 
-class Particula {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-    this.vx = random(-2, 2);
-    this.vy = random(-5, -2); 
-    this.alfa = 255; 
-    // El tamaño de la partícula escala según el ancho de la ventana
-    this.tamano = random(width * 0.008, width * 0.015);
+let chica = { // Variables de la chica 
+  x: 700, // Posición de la imagen de la chica en X          
+  y: 450, // Posición de la imagen de la chica en Y          
+  circuloX: 830, // Valor de X del círculo que es la cabeza 
+  alto: 550 // Mantenemos el alto para controlar su tamaño vertical       
+};
+
+class Particula { // Estructura o molde para crear cada partícula de enojo
+  constructor(x, y) { // Inicializa los valores al crear cada partícula
+    this.x = x; // Coordenada X inicial
+    this.y = y; // Coordenada Y inicial
+    this.vx = random(-3, 3); // Velocidad aleatoria en el eje X
+    this.vy = random(-7, -3); // Velocidad aleatoria hacia arriba en el eje Y
+    this.alfa = 255; // Transparencia inicial de la partícula
+    this.tamano = random(18, 35); // Diámetro aleatorio de la partícula
   }
 
-  actualizar() {
-    this.x += this.vx;
-    this.y += this.vy;
-    this.alfa -= 7; 
+  actualizar() { // Calcula el movimiento y desvanecimiento
+    this.x += this.vx; // Suma la velocidad a la posición X
+    this.y += this.vy; // Suma la velocidad a la posición Y
+    this.alfa -= 7; // Disminuye la transparencia para desvanecerla
   }
 
-  mostrar() {
-    noStroke();
-    fill(150, 20, 20, this.alfa); 
-    circle(this.x, this.y, this.tamano);
+  mostrar() { // Dibuja la partícula en el lienzo
+    noStroke(); // Quita el borde
+    fill(150, 20, 20, this.alfa); // Rellena con color rojo oscuro y aplica la transparencia actual
+    circle(this.x, this.y, this.tamano); // Dibuja un círculo
   }
 
-  estaMuerta() {
+  estaMuerta() { // Comprueba si la partícula ya desapareció por completo
     return this.alfa <= 0; 
   }
 }
 
-// ==========================================
-// FUNCIONES DEL SISTEMA P5.JS
-// ==========================================
-function preload() {
-  // NOTA: Asegúrate de que los nombres de archivo coincidan exactamente en tu carpeta
+function preload() { // Sirve para cargar archivos antes de que empiece el programa 
   miSonido = loadSound("tusoundtrack.mp3");
   imagenFondo = loadImage("metrofondo.png");
-  chicaI = loadImage("chica.png"); 
-  chicoI = loadImage("chico.png"); 
+  chicaI = loadImage("chica.png");
+  chicoI = loadImage("chico.png");
   enojoI = loadImage("enojo.png");
   imagenReinicio = loadImage("reinicio.png");
 }
 
-function setup() {
-  // El lienzo toma el tamaño total de la ventana del navegador
-  createCanvas(windowWidth, windowHeight); 
-  frameRate(20);
-  
-  // Verificación de seguridad para el volumen del sonido
-  if (miSonido && typeof miSonido.setVolume === 'function') {
-    miSonido.setVolume(0.15); 
-  }
-  
-  // Inicializa las posiciones responsivas
-  inicializarDimensiones();
+function setup() { // Es una función que se ejecuta solo una vez en el programa 
+  createCanvas(1920, 1080); // Crea un lienzo en X, Y 
+  frameRate(20); // Limita cuántas veces por segundo se ejecuta el draw 
+  miSonido.setVolume(0.15); // Define el volumen del soundtrack
 }
 
-function draw() {
-  if (estado == 0) {
+function draw() { // Es una función que se ejecuta constantemente en bucle
+  if (estado == 0) { // Si el estado es 0 muestra la bienvenida
     pantallaInicio();
-  } else if (estado == 1) {
+  } else if (estado == 1) { // Si el estado es 1 muestra las instrucciones
     pantallaInstrucciones();
-  } else {
-    backgroundS();
-    gestionarParticulas(); 
-    hombre();
-    mujer();
-    titulo();
-    enojo(); 
-    botonReiniciar();
+  } else { // Si el estado es diferente muestra los elementos del juego
+    backgroundS(); // Organiza los elementos del fondo 
+    gestionarParticulas(); // Controla y borra las partículas
+    mujer(); // Dibuja las partes de la chica
+    hombre(); // Dibuja los elementos del chico
+    titulo(); // Dibuja los elementos del título
+    enojo(); // Dibuja la imagen del símbolo de enojo y activa partículas
+    botonReiniciar(); // Dibuja el botón para volver a empezar
   }
 }
 
-// Esta función se ejecuta automáticamente cuando cambias el tamaño de la ventana
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight); 
-  inicializarDimensiones();
-}
+function pantallaInicio() { // Elementos de la pantalla de bienvenida
+  background(0); // Fondo negro
+  textAlign(CENTER, CENTER); // Centra los textos en horizontal y vertical
+  textFont("Georgia"); // Define la tipografía
+  fill(255); // Color de texto blanco
 
-function inicializarDimensiones() {
-  let chicoAnchoBase = width * 0.30;
-  let chicoAltoBase = chicoAnchoBase * 1.2;
+  textSize(80); // Tamaño del título 
+  text("Manspreading", width / 2, height / 2 - 180);
 
-  chico = {
-    x: width * 0.60,       
-    y: height * 0.50 - 20,      
-    ancho: chicoAnchoBase,   
-    alto: chicoAltoBase, // <--- Ahora heredará la proporción exacta sin estirarse
-    piernaD: width * 0.63, 
-    // ... el resto de tu objeto chico igual 
-    piernaI: width * 0.54, 
-    tamPierna: width * 0.05,
-    lado: width * 0.09,
-    originalPiernaD: width * 0.63, 
-    originalPiernaI: width * 0.54
-  };
-
-  // Hacemos lo mismo con la chica para que tampoco se deforme al redimensionar
-  let chicaAnchoBase = width * 0.17;
-  let chicaAltoBase = chicaAnchoBase * 2.3; // Ajusta según la proporción de tu imagen
-
-  chica = {
-    x: (width / 2) - 95,        
-    y: (height / 2) + 160,
-    ancho: chicaAnchoBase,   
-    alto: chicaAltoBase, 
-    circuloX: (width / 2) - 95, 
-    originalX: (width / 2) - 95,
-    originalCirculoX: (width / 2) - 95
-  };
-  
-  // ... (el resto de tu función con los "click *" se queda exactamente igual)
-  chico.ancho += click * (width * 0.008);
-  chico.alto += click * (height * 0.006);
-  chico.lado += click * (width * 0.003);
-  chico.piernaD += click * (width * 0.006);
-  chico.piernaI -= click * (width * 0.01);
-  chico.tamPierna += click * (width * 0.004);
-  
-  if (click >= 5) {
-    chica.x = chica.originalX - (width * 0.036);
-    chica.circuloX = chica.originalCirculoX - (width * 0.036);
-  }
-}
-
-function pantallaInicio() {
-  background(0);
-  textAlign(CENTER, CENTER);
-  textFont("Georgia");
-  fill(255);
-
-  textSize(min(width * 0.05, 75));
-  text("Manspreading", width / 2, height * 0.38);
-
-  textSize(min(width * 0.025, 38));
+  textSize(40); // Texto informativo dividido en renglones
   text(
-    "Es una costumbre en la que algunas personas abren\n" +
+    "Es una costumbre en la que algunos hombres abren\n" +
     "excesivamente las piernas al sentarse, ocupando más\n" +
     "espacio del necesario y llegando a incomodar a la\n" +
     "persona que está a su lado.",
     width / 2,
-    height * 0.52
+    height / 2 + 50
   );
 
-  textSize(min(width * 0.02, 30));
-  fill(250, 250, 250, 200);
-  text("Haz clic en la pantalla para continuar", width / 2, height * 0.82);
+  textSize(30);
+  fill(250, 250, 250, 200); // Blanco con un poco de transparencia
+  text("Haz clic en la pantalla para continuar", width / 2, height / 2 + 380);
 }
 
-function pantallaInstrucciones() {
-  background(0);
+function pantallaInstrucciones() { // Menú intermedio con las reglas
+  background(50); // Fondo gris oscuro
   fill(255);
   textAlign(CENTER);
 
- textSize(min(width * 0.04, 56));
-  text("Instrucciones", width / 2, height * 0.17);
+  textSize(60); // Encabezado de la pantalla
+  text("Instrucciones", width / 2, height / 2 - 250);
 
- textSize(min(width * 0.022, 34));
+  textSize(35); // Lista de pasos para el usuario
   text(
     "1. Haz clic en la pantalla para interactuar.\n \n" +
     "2. Cada clic aumenta el espacio que ocupa el personaje masculino.\n \n" +
-    "3. La interacción tiene un máximo de 5 clics.\n \n" +
+    "3. La interacción tiene un máximo de 7 clics.\n \n" +
     "4. Observa los cambios en la escena.\n \n" +
     "5. Reinicia cuando quieras.",
     width / 2,
-    height * 0.52
+    height / 2 + 20
   );
 
-textSize(min(width * 0.018, 26));
+  textSize(30);
   fill(250, 250, 250, 200);
-  text("Haz clic en la pantalla para comenzar", width / 2, height * 0.82);
+  text("Haz clic en la pantalla para comenzar", width / 2, height / 2 + 380);
 }
 
-function backgroundS() {
-  if (!chico) return;
+function backgroundS() { // Función de los elementos del fondo, map e imágenes
+  rojo = map(chico.ancho, 450, 510, 0, 255); // Convierte el rango del ancho a un rango de color de 0 a 255 
+  background(rojo, 0, 0); // Crea un fondo que se tiñe usando la variable rojo
 
-  // valores fijos tipo tu código original
-  let anchoMin = chico.ancho - (click * (width * 0.008));
-  let anchoMax = chico.ancho + (5 * (width * 0.008));
-
-  rojo = map(click, 0, 6, 0, 255);
-
-  if (click === 0) rojo = 0;
-
-  background(rojo, 0, 0);
-
-  if (imagenFondo) {
-    image(imagenFondo, 0, 0, width, height);
-  }
-
-  fill(rojo, 0, 0, 150);
-  rect(0, 0, width, height);
+  image(imagenFondo, 0, 0, width, height); // Carga la imagen de fondo acoplada al lienzo
+  fill(rojo, 0, 0, 150); // Rellena con un filtro rojo translúcido
+  rect(0, 0, width, height); // Tamaño del rectángulo que cubre la pantalla
 }
 
-function mujer() {
-  noStroke();
+function mujer() { // Elementos del personaje de la chica
+  noStroke(); // Quita el borde de las figuras
+  
+  // Calculamos el ancho ideal basado en la altura para que no se deforme
+  let anchoProporcional = (chicaI.width / chicaI.height) * chica.alto;
 
-  if (chicaI) {
-    image(
-      chicaI,
-      chica.x - chica.ancho / 2,
-      chica.y - chica.alto / 2,
-      chica.ancho,
-      chica.alto
-    ); 
-  }
+  image(chicaI, chica.x, chica.y, anchoProporcional, chica.alto); // Coloca la imagen de la chica
 
-  let diametroCirculo = width * 0.10;
-  let cabezaY = (chica.y - chica.alto * 0.35) - 110 ;
-
+  // Si el usuario llega al clic 6 el círculo de la cabeza cambia a colores locos
   if (click == 6) {
     fill(random(255), random(255), random(255));
-    circle(
-      chica.circuloX + desplazamientoMujer,
-      cabezaY,
-      random(diametroCirculo * 1.5)
-    );
-  } else {
+    circle(chica.circuloX, chica.y - 100, random(300));
+  } else { // Si no ha llegado a 6 clics mantiene el círculo rosa fijo
     fill(238, 157, 225);
-    circle(
-      chica.circuloX + desplazamientoMujer,
-      cabezaY,
-      diametroCirculo
-    ); 
+    circle(chica.circuloX, chica.y - 100, 180); 
   }
 }
 
-function hombre() {
-  if (!chico) return;
-
-  push();
-  fill(91, 69, 169); 
+function hombre() { // Esta función dibuja al personaje chico
+  push(); // Guarda la configuración actual del dibujo 
+  fill(91, 69, 169); // Define el color morado para las piernas
   noStroke();
 
-  rect(chico.piernaI, chico.y + (chico.alto * 0.4), chico.tamPierna, height * 0.27); 
-  rect(chico.piernaD, chico.y + (chico.alto * 0.4), chico.tamPierna, height * 0.27); 
+  // Dibuja la pierna izquierda y la pierna derecha
+  rect(chico.piernaI, chico.y + 200, chico.tamPierna, 300);
+  rect(chico.piernaD, chico.y + 200, chico.tamPierna, 300);
 
-  imageMode(CENTER);
-  rectMode(CORNER);
-  
-  if (chicoI) {
-    image(chicoI, chico.x, chico.y, chico.ancho, chico.alto);
-  }
-  pop();
+  imageMode(CENTER); // Configura el dibujo de la imagen desde el centro
+  image(chicoI, chico.x, chico.y - 40, chico.ancho, chico.alto); // Dibuja la imagen del chico ajustando la altura
+  pop(); // Vuelve a la configuración original del programa
 }
 
-function titulo() {
+function titulo() { // Esta función dibuja el título superior
   push();
-  fill(255);
-  textSize(width * 0.032);
+  fill(255); // Color blanco para el texto
+  textSize(45); // Tamaño del texto
   textFont("Georgia");
-  textAlign(CENTER, TOP);
-  text("¿Como ocupas el espacio?", width / 2, height * 0.05);
+  textAlign(CENTER, TOP); // Centrado horizontal alineado arriba
+  text("¿Cómo ocupas el espacio?", width / 2, 50); // Texto impreso
   pop();
 }
 
-function enojo() {
-  if (click >= 5) {
+function enojo() { // Elementos de la imagen de enojo y partículas
+  if (click >= 5) { // Después de 5 clics realiza lo siguiente
     push();
-    let cabezaY = (chica.y - chica.alto * 0.35) - 150;
-    translate(chica.circuloX + 30, cabezaY); 
-    rotate(frameCount * 0.05);  
+    translate(chica.circuloX + 70, chica.y - 130); // Desplaza el origen a la posición ajustada de la cabeza
+    rotate(frameCount * 0.05); // Rota la imagen continuamente sobre su propio centro
     imageMode(CENTER);
-    let tamEnojo = width * 0.05;
-    if (enojoI) {
-      image(enojoI, 0, 0, tamEnojo, tamEnojo);  
-    }
+    image(enojoI, 0, 0, 110, 110); // Dibuja el símbolo de enojo
     pop();
 
-    if (click == 6) {
-      if (frameCount % 2 == 0) { 
-        let origenX = chica.circuloX + random(-width * 0.02, width * 0.02);
-        let origenYParticles = cabezaY + random(-height * 0.03, height * 0.03);
-        particulas.push(new Particula(origenX, origenYParticles)); 
-      }
+    if (frameCount % 2 == 0) { // Crea una partícula nueva de forma intermitente cada 2 cuadros
+      let origenX = chica.circuloX  + random(-40, 40); // Variación aleatoria en X
+      let origenY = (chica.y - 130) + random(-40, 40); // Variación aleatoria en Y
+      particulas.push(new Particula(origenX, origenY)); // Añade una nueva partícula al arreglo
     }
   }
 }
 
-function gestionarParticulas() {
+function gestionarParticulas() { // Recorre el arreglo al revés para actualizar y borrar partículas
   for (let i = particulas.length - 1; i >= 0; i--) {
-    particulas[i].actualizar(); 
-    particulas[i].mostrar();     
-    if (particulas[i].estaMuerta()) {
+    particulas[i].actualizar(); // Calcula la posición y la opacidad de la partícula
+    particulas[i].mostrar(); // Pinta la partícula en la pantalla
+    
+    if (particulas[i].estaMuerta()) { // Si la transparencia llegó a 0 la remueve
       particulas.splice(i, 1); 
     }
   }
 }
 
-function botonReiniciar() {
-  let botonX = width * 0.93;
-  let botonY = height * 0.06;
-  let diametroBoton = width * 0.04;
+function botonReiniciar() { // Construye visualmente el botón de reinicio
+  let botonX = width - 80; 
+  let botonY = 60;
+
   push();
-  fill(0);
-  stroke(255);
-  circle(botonX, botonY, diametroBoton);
+  fill(0); // Círculo base negro
+  stroke(255); // Borde blanco
+  circle(botonX, botonY, 70); 
   imageMode(CENTER);
-  if (imagenReinicio) {
-    image(imagenReinicio, botonX, botonY, diametroBoton * 0.6, diametroBoton * 0.6);
-  }
+  image(imagenReinicio, botonX, botonY, 45, 45); // Icono del botón centrado
   pop();
 }
 
-function mousePressed() {
-  if (estado == 0) {
+function mousePressed() { // Esta función se ejecuta cada vez que el usuario hace clic con el mouse
+  if (estado == 0) { // Si está en inicio pasa a las instrucciones
     estado = 1;
     return;
   }
-  if (estado == 1) {
+
+  if (estado == 1) { // Si está en instrucciones pasa al juego
     estado = 2;
     return;
   }
-  if (estado == 2) {
-    let botonX = width * 0.93;
-    let botonY = height * 0.06;
-    let distanciaBoton = dist(mouseX, mouseY, botonX, botonY);
-    if (distanciaBoton < (width * 0.02)) {
+
+  if (estado == 2) { // Si ya está dentro del simulador interactivo
+    let distanciaBoton = dist(mouseX, mouseY, width - 80, 60); // Calcula la distancia entre el mouse y el botón
+
+    if (distanciaBoton < 35) { // Si hace clic dentro del rango del botón reinicia el programa
       reiniciar();
       return; 
     }
-    
-    // Si 'chico' no está listo, no procesa clics del juego
-    if (!chico) return;
 
-    if (click < 6) {
-      chico.ancho += width * 0.008; 
-      chico.alto += height * 0.006; 
-      chico.lado += width * 0.003;
-      chico.piernaD += width * 0.006; 
-      chico.piernaI -= width * 0.01; 
-      chico.tamPierna += width * 0.004; 
-      click++; 
+    if (click < 6) { // Si se da menos de 6 clics deforma y expande las dimensiones del chico
+      chico.ancho += 20;  
+      chico.alto += 35; 
+      chico.piernaD += 20; // Abre la pierna derecha
+      chico.piernaI -= 30; // Abre la pierna izquierda hacia afuera
+      chico.tamPierna += 8; // Engrosa los rectángulos de las piernas
+      click++; // Suma 1 al contador de clics
     }
-    if (click == 5) {
-      chica.x -= width * 0.036; 
-      chica.circuloX -= width * 0.036; 
+
+    if (click == 5) { // Si el usuario da exactamente 5 clics desplaza a la chica
+      chica.x -= 100; // Mueve la imagen de la chica a la izquierda
+      chica.circuloX -= 100; // Mueve también el círculo de su cabeza
     }
-    if (click == 6) {
-      if (miSonido && typeof miSonido.isPlaying === 'function' && !miSonido.isPlaying()) {
+
+    if (click == 6) { // En el último clic arranca el soundtrack en bucle continuo si no estaba sonando
+      if (!miSonido.isPlaying()) {
         miSonido.loop();
       }
     }
   }
 }
 
-function reiniciar() {
+function reiniciar() { // Restablece todas las variables globales a sus valores originales
   estado = 0; 
   click = 0;
-  if (miSonido && typeof miSonido.stop === 'function') miSonido.stop(); 
-  particulas = []; 
-  inicializarDimensiones();
-} 
+  miSonido.stop(); // Detiene la música por completo
+  particulas = []; // Limpia el arreglo de partículas
+
+  // Valores restaurados del chico
+  chico.x = 1120;
+  chico.y = 550;
+  chico.ancho = 450;
+  chico.alto = 550;
+  chico.piernaD = 1150;
+  chico.piernaI = 1020;
+  chico.tamPierna = 90;
+
+  // Valores restaurados de la chica
+  chica.x = 700;
+  chica.y = 450;
+  chica.circuloX = 820;
+}
 ```
