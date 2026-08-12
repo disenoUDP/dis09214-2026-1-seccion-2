@@ -107,10 +107,9 @@ Berger crítica al poder, a las convenciones de la historia del arte y a la form
 ## Código p5.js  
 
  ```  
-
 let estado = 0; // Se crea la variable para definir el estado de las pantallas
 let animando = false; // Se declara la variable animando para generar la animación más adelante en estado false
-let visible = false; // // Se declara la variable visible para generar la visibilidad
+let visible = false; // // Se declaqra la variable visible para generar la visibilidad
 let imagY; // Se declara la variable para la posición Y de la imagen
 let imagX; // Se declara la variable para la posición X de la imagen
 let imagW; // Se declara la variable para el ancho de la imagen
@@ -153,14 +152,14 @@ function preload(){ // Se activa la función para pre-cargar las imagenes y el s
 
 function setup() {
   
-  let anchoPantalla = min(windowWidth, (windowHeight * 9) / 16); // Se crea la variable y se calcula el ancho de la pantalla asegurando que no sobrepase el ancho de la ventana manteniendo la proporción vertical de 9:16
-  let altoPantalla = (anchoPantalla * 16) / 9; // Se crea la variable y se calcula el alto de la pantalla forzando que el canvas se mantenga siempre en el formato 9:16
-  createCanvas(anchoPantalla, altoPantalla); // Se crea el canvas con las variables de ancho y alto (1920x1080)
-    imageMode(CENTER); // Se activa la opción para que las imágenes estén en el centro
+  let anchoPantalla = min(windowWidth, (windowHeight * 16) / 9); // Se crea la variable y se calcula el ancho de la pantalla asegurando que no sobrepase el ancho de la ventana manteniendo la proporción vertical de 16:9
+  let altoPantalla = (anchoPantalla * 9) / 16; // Se crea la variable y se calcula el alto de la pantalla forzando que el canvas se mantenga siempre en el formato 16:9
+ createCanvas(anchoPantalla, altoPantalla); // Se crea el canvas con las variables de ancho y alto (1920x1080)
+  imageMode(CENTER); // Se activa la opción para que las imágenes estén en el centro
   
   Fotos = [foto1, foto2, foto3, foto4, foto5, foto6, foto7, foto8, foto9, foto10]; // Se cargan las fotos dentro de la variable
   botonSiguiente = createButton('Continuar'); // Se crea el botón en el canvas y se le asigna el texto
-  botonSiguiente.position(width * 0.43,  height * 0.9 ); // Se le posiciona en la pantalla
+  botonSiguiente.position(width / 2 - botonSiguiente.size().width / 2, height * 0.9);
   botonSiguiente.mousePressed(cambiarEstado); // Se aplica que el botón al presionarlo hará que se cambie de estado a otro
 }
 
@@ -196,9 +195,9 @@ function pantallaInstrucciones() { // Se inicia la función para la pantalla de 
   textSize(24); // Se le asigna un tamaño al texto de 24
   text("INSTRUCCIONES", width / 2 , height * 0.2 - 20); // Se crea el texto "Instrucciones" y se posiciona en la mitad del ancho del canvas, en el 20% del alto - 20 del canvas
   textSize(20); // Se le asigna un tamaño al texto de 20
-  textAlign(LEFT, CENTER);  // Se activa la opción para que el texto esté en la izquierda y el centro
-  fill(0); // Se rellena de color negro
-  noStroke(); // Se le quitan los bordes
+  textAlign(CENTER, CENTER);  
+  fill(0); 
+  noStroke(); 
   
   let instrucciones = `1. Haz click en el botón de abajo para continuar.
   
@@ -208,24 +207,25 @@ function pantallaInstrucciones() { // Se inicia la función para la pantalla de 
 
 4. Para iniciar la interacción mantén presionada la tecla "Q".
 
-5. Para volver al inicio haz clic en el botón.`; // Se declara la variable "Instrucciones" y con el `, nos ayuda a que todo el texto quede bien distribuido en el canvas
+5. Para volver al inicio haz clic en el botón.`; 
   
-  text(instrucciones, width * 0.1, height * 0.55, width * 0.85); // Se posiciona el texto en el canvas que estará en el 10% de ancho del canvas, el 55% de alto y un 85% del ancho total del canvas
+  
+  text(instrucciones, width * 0.1, height * 0.5, width * 0.8); // Se crea el texto con la variable instrucciones y se le asigna su posición X en el 10% y 50% del canvas, con un ancho de 80%
 }
 
 function pantallaExperiencia() { // Se inicia la función para la pantalla de la Experiencia
   
   background(163, 163, 163); // Se asigna color al fondo
   fill(64, 64, 64); // Se rellena de color gris 
-  rect(width * 0.0, height * 0.6, width * 1, height * 1 ); // Se crea un rectangulo que inicia en el borde en el punto 0 y al 60% de la altura del canvas, y utilizará todo el ancho y alto del canvas
+  rect(width * 0.0, height * 0.6, width, height); // Se crea un rectangulo que inicia en el borde en el punto 0 y al 60% de la altura del canvas, y utilizará todo el ancho y alto del canvas
 
   
-  let anchoEst = width * 0.5; // Se declara la variable anchoEst que utiliza un 50% de ancho
+  let anchoEst = width * 0.185; // Se declara la variable anchoEst que utiliza un 18.5% de ancho
   let altoEst = height * 0.23; // Se declara la variable altoEst que utiliza un 23% de alto
-  let posXEst = width * 0.2; // Se declara la variable posXEst que inicia en el 20% del ancho canvas 
-  let posYEst = height * 0.28; // Se declara la variable posYEst que inicia en el 28% del alto canvas 
+  let posXEst = width * 0.39; // Se declara la variable posXEst que inicia en el 39% del ancho canvas 
+  let posYEst = height * 0.2; // Se declara la variable posYEst que inicia en el 20% del alto canvas 
 
-  image(mueble, width * 0.5,  height * 0.7, width * 0.8, height * 0.4); // Se integra una imagen que estará posicionada en el 50% y 70% del canvas y  que utiliza un 80% del ancho y 40% del alto total
+  image(mueble, width * 0.5,  height * 0.7, width * 0.3, height * 0.5); // Se integra una imagen que estará posicionada en el 50% y 70% del canvas y  que utiliza un 30% del ancho y 50% del alto total
   
   
   if (estadoBoton === 0){ // Se crea una condicional que dice, si el estado del boton está en 0 ocurrirá lo siguiente 
@@ -257,9 +257,7 @@ function pantallaExperiencia() { // Se inicia la función para la pantalla de la
     
   fill(Colores[i]); // Se rellena con los colores asignados
   noStroke(); // Se quitan los bordes
-  rect(posXEst + (i * anchoFranja) + glitchX, posYEst, anchoFranja + 5, altoEst); // Se crea un rectangulo que estará en la posición de la estática (Rectangulo inicial) y se sumará por el ancho de las franjas que será 5 veces más ancha para que se superpongan entre sí  
-
-  
+  rect(posXEst + (i * anchoFranja) + glitchX, posYEst, anchoFranja + 5, altoEst); // Se crea un rectangulo que estará en la posición de la estática (Rectangulo inicial) y se sumará por el ancho de las franjas que será 5 veces más ancha para que se superpongan entre sí   
   }
   } 
     
@@ -280,12 +278,12 @@ function pantallaExperiencia() { // Se inicia la función para la pantalla de la
     }  
   } 
   
-  let posXBoton = width * 0.78; // Se crea la variable posXBoton para los botones que manejarán los canales, y estos se posicionan en el 78% de X del canvas
-  let posYBoton1 = height * 0.314; // Se crea la variable posYBoton1 que irá en el 31.4% de Y del canvas
-  let posYBoton2 = height * 0.376; // Se crea la variable posYBoton2 que irá en el 37.6% de Y del canvas
-  let tamBoton = width * 0.06; // Se crea la variable tamBoton y se le asigna un tamaño de 0.06% del canvas
+  let posXBoton = width * 0.605; // Se crea la variable posXBoton para los botones que manejarán los canales, y estos se posicionan en el 60.5% de X del canvas
+  let posYBoton1 = height * 0.246; // Se crea la variable posYBoton1 que irá en el 24.6% de Y del canvas
+  let posYBoton2 = height * 0.325; // Se crea la variable posYBoton2 que irá en el 32.5% de Y del canvas
+  let tamBoton = width * 0.03; // Se crea la variable tamBoton y se le asigna un tamaño de 0.03% del canvas
   
-  image(tele, width * 0.5, height * 0.4, width * 0.78, height * 0.35 );   // Se agrega la imagen de la tv en el 50% de X del canvas, y el 40% del ancho del canvas y utiliza un 78% de ancho y un 35% de alto 
+    image(tele, width * 0.5, height * 0.35, width * 0.3, height * 0.4 );   // Se agrega la imagen de la tv en el 50% de X del canvas, y el 35% del ancho del canvas y utiliza un 30% de ancho y un 40% de alto 
   
   fill(94, 88, 69); // Se rellena de color café grisaceo
   ellipse(posXBoton, posYBoton1, tamBoton); // Se crea una ellipse en las coordenadas x e y 
@@ -301,12 +299,12 @@ function pantallaFinal() {
   fill(64, 64, 64); // Se rellena de color gris 
   rect(width * 0.0, height * 0.6, width * 1, height * 1 ); // Se crea un rectangulo que inicia en el borde en el punto 0 y al 60% de la altura del canvas, y utilizará todo el ancho y alto del canvas
   
-  let anchoEst = width * 0.5; // Se declara la variable anchoEst que utiliza un 50% de ancho
+  let anchoEst = width * 0.185; // Se declara la variable anchoEst que utiliza un 18.5% de ancho
   let altoEst = height * 0.23; // Se declara la variable altoEst que utiliza un 23% de alto
-  let posXEst = width * 0.2; // Se declara la variable posXEst que inicia en el 20% del ancho canvas 
-  let posYEst = height * 0.28; // Se declara la variable posYEst que inicia en el 28% del alto canvas 
+  let posXEst = width * 0.39; // Se declara la variable posXEst que inicia en el 39% del ancho canvas 
+  let posYEst = height * 0.2; // Se declara la variable posYEst que inicia en el 20% del alto canvas 
 
-  image(mueble, width * 0.5,  height * 0.7, width * 0.8, height * 0.4); // Se integra una imagen que estará posicionada en el 50% y 70% del canvas y  que utiliza un 80% del ancho y 40% del alto total
+  image(mueble, width * 0.5,  height * 0.7, width * 0.3, height * 0.5); // Se integra una imagen que estará posicionada en el 50% y 70% del canvas y  que utiliza un 30% del ancho y 50% del alto total
   
   let fotoX = posXEst + anchoEst / 2; // Se crea una variable llamada fotoX que será igual a posXest + anchoEst partido a la  mitad
   let fotoY = posYEst + altoEst /2; // Se crea una variable llamada fotoX que será igual a posYEst + altoEst partido a la mitad
@@ -321,9 +319,7 @@ function pantallaFinal() {
   index = 0; 
     } 
     }
-  image(tele, width * 0.5, height * 0.4, width * 0.78, height * 0.35 );   // Se agrega la imagen de la tele en el 50% de X del canvas, y el 40% del ancho del canvas y utiliza un 78% de ancho y un 35% de alto 
-
-
+   image(tele, width * 0.5, height * 0.35, width * 0.3, height * 0.4 );   // Se agrega la imagen de la tv en el 50% de X del canvas, y el 35% del ancho del canvas y utiliza un 30% de ancho y un 40% de alto 
   
   imagH = height * 0.55; // Se le asigna el valor de un 55% del alto del canvas
   imagW = imagH * 0.8; // Se le asigna el valor al ancho de la imagen, que será imagH (el alto) - el 80% del ancho del canvas
@@ -355,8 +351,8 @@ function pantallaFinal() {
   r = random(60,240); // Se le asigna un valor de color aleatorio a r
   g = r * random(0.65, 0.8); // Se le asigna un valor de color aleatorio a g, que será r por el color aleatorio
   b = g * random(0.55, 0.75); // Se le asigna un valor de color aleatorio a b, que será g por el color aleatorio
-  tamC = random(tamaños); // Se le asigna un tamaño aleatorio a tamC, que serán los asignados en "tamaños"
-  tam2 = random(tamaños2); // Se le asigna un tamaño aleatorio a tam2, que serán los asignados en "tamaños2"
+  tamC = width * random(0.03, 0.05); // Se le asigna una posición al tamaño que será del ancho x los tamaños aleatorios asignados
+  tam2 = width * random(0.035, 0.052); // Se le asigna una posición al tamaño que será del ancho x los tamaños aleatorios asignados
   indexA = indexA + 1; // Si se avanza 20fps se sumará un emoji al index
   if (indexA >= emojis.length) { // Se crea una condicional que dice que si la cantidad del index es igual o mayor a la cantidad de emojis, el index volverá a 0, repitiendo el ciclo
     indexA = 0;
@@ -364,11 +360,11 @@ function pantallaFinal() {
     }
     
   rectMode(CENTER) // Se activa la opción para que las figuras estén en el centro
-  let posX= width * 0.53;  // Se declara y se le asigna un valor a la variable posX que estará en el 53% del ancho del canvas
+  let posX= width * 0.477;  // Se declara y se le asigna un valor a la variable posX que estará en el 47.7% del ancho del canvas
   let posY = height * 0.7; // Se declara y se le asigna un valor a la variable posY que estará en el 70% del alto del canvas
   fill(r,g,b);  // Se rellena con los colores antes asignados
   rect(posX, posY,tamC, tam2); // Se crea un rectangulo en las posiciones declaradas por las variables
-  textSize(30); // Se le asigna tamaño al texto, que será de 30          
+  textSize(tamC * 0.45); // Se le asigna tamaño al texto, que será de un 45%          
   textAlign(CENTER, CENTER); // Se activa la opción en el que el texto esté en el centro del canvas
   text(emojis[indexA], posX, posY); // Se crea un texto de los emojis que estarán en la posición declarada por las variables
   }
@@ -400,25 +396,25 @@ function cambiarEstado() { // Se activa la función para cambiar el estado
   }
 }
 
-function windowResized() { // Se activa la función Window Resize
-  let anchoPantalla = min(windowWidth, (windowHeight * 9) / 16); // Se crea la variable y se calcula el ancho de la pantalla asegurando que no sobrepase el ancho de la ventana manteniendo la proporción vertical de 9:16
-  let altoPantalla = (anchoPantalla * 16) / 9; // Se crea la variable y se calcula el alto de la pantalla forzando que el canvas se mantenga siempre en el formato 9:16
-  resizeCanvas(anchoPantalla, altoPantalla); // Se redimensiona el canvas al ancho y alto
+function windowResized() { // Se activa la función Window Resized con los valores antes asignados
+  let anchoPantalla = min(windowWidth, (windowHeight * 16) / 9); 
+  let altoPantalla = (anchoPantalla * 9) / 16; 
+  resizeCanvas(anchoPantalla, altoPantalla); 
+  botonSiguiente.position(width / 2 - botonSiguiente.size().width / 2, height * 0.9);
 
-  botonSiguiente.position(width * 0.43, height * 0.9); // Se declara la posición del botón, que estará en el 43% de X y el 90% de Y
+
 }
-
 function mousePressed() { // Se activa la función mouse pressed
-  let posXBoton = width * 0.78; // Se declara la variable posXBoton que estará en el 78% de X
-  let posYBoton1 = height * 0.314;  // Se declara la variable posYBoton que estará en el 31.4% de Y
-  let tamBoton = width * 0.06 // Se declara la variable tamBoton que será un 06% del canvas
+  let posXBoton = width * 0.605; // Se crea la variable posXBoton para los botones que manejarán los canales, y estos se posicionan en el 60.5% de X del canvas
+  let posYBoton1 = height * 0.246; // Se crea la variable posYBoton1 que irá en el 24.6% de Y del canvas
+  let tamBoton = width * 0.03; // Se crea la variable tamBoton y se le asigna un tamaño de 0.03% del canvas
   let distancia = dist(mouseX, mouseY, posXBoton, posYBoton1); // Se declara la variable distancia, que será igual a dist(calcula la distancia entre dos puntos) por lo que calcula la distancia en la posición actual del mouse y la posición del botón
 
   if (distancia < tamBoton && estado === 1) { // Se crea una condicional que dice que si la distancia es mayor al tamaño del botón ocurrirá lo siguiente 
     estadoBoton = estadoBoton + 1; // El estado de botón es igual a estado de botón + 1
       
   if (estadoBoton > 2) { // Se crea una condicional que dice que si el estado de botón es mayor a 2, este volverá a 0
-      estadoBoton = 0;
+     estadoBoton = 0;
   }
   est.stop(); // Se agregan los audios y se apagan antes de iniciar 
   estColor.stop();
@@ -434,8 +430,7 @@ function mousePressed() { // Se activa la función mouse pressed
     }  
     }
 }     
-
  ```  
 
 
-## [Sketch p5.js](https://editor.p5js.org/kitcaaatt/sketches/sA0h7LWIp)  
+## [Sketch p5.js](https://editor.p5js.org/kitcaaatt/sketches/68mtF3yJG)  
