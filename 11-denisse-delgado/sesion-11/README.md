@@ -2,8 +2,8 @@
 
 ## Información del proyecto:
 
-**Nombre del proyecto:** Nunca es suficiente 
-**Autora:** Denisse Delgado  
+  * Nombre del proyecto: Nunca es suficiente 
+  * Autora: Denisse Delgado  
 
 ---
 
@@ -19,22 +19,22 @@
 El proyecto se compone de tres estados principales:
 
 Pantalla 1: Inicio
-    * Título del proyecto.
-    * Breve descripción conceptual.
-    * Botón para comenzar la experiencia.
+  * Título del proyecto.
+  * Breve descripción conceptual.
+  * Botón para comenzar la experiencia.
 
 Pantalla 2: Instrucciones
-    * Explicación de la interacción.
-    * Indicaciones para navegar dentro del sistema.
-    * Botón para acceder a la visualización.
+  * Explicación de la interacción.
+  * Indicaciones para navegar dentro del sistema.
+  * Botón para acceder a la visualización.
 
 Pantalla 3: Interacción
-    * Dos figuras femeninas.
-    * Una nube compuesta por palabras asociadas a exigencias estéticas.
-    * Partículas ambientales.
-    * Fondo dinámico.
-    * Textos reflexivos.
-    * Elementos gráficos decorativos.
+  * Dos figuras femeninas.
+  * Una nube compuesta por palabras asociadas a exigencias estéticas.
+  * Partículas ambientales.
+  * Fondo dinámico.
+  * Textos reflexivos.
+  * Elementos gráficos decorativos.
 
   * En la pantalla 3 aparecen dos figuras femeninas, una más grande y otra más pequeña y triste, conectadas mediante una flecha que representa una transformación progresiva. El/La usuari@ puede interactuar moviendo el mouse horizontalmente, lo que modifica el comportamiento visual de los elementos. También aparece una nube compuesta por palabras relacionadas con estándares de belleza y exigencias sociales, además de partículas y elementos gráficos ambientales.
 
@@ -249,7 +249,7 @@ La interacción principal ocurre en la pantalla 3 con el movimiento horizontal d
 (https://editor.p5js.org/denisse.delgado2/sketches/yUF1ghR7g)
 
 ```
-// =====================================================
+// ------------------------------------------------------
 // VARIABLES
 
 // Imágenes principales del proyecto
@@ -295,7 +295,7 @@ let presion = 0; // Nivel de presión (Derivado del mouse)
 let colorFondo; // Color del fondo dinámico según interacción con el mouse
 let rotacionNube = 0; // Controla la rotación progresiva de la nube de palabras.
 
-// =====================================================
+// ------------------------------------------------------
 //CLASE
 
 // Clase que define el comportamiento de cada partícula
@@ -328,7 +328,7 @@ class Particula {
   }
 }
 
-// =====================================================
+// ------------------------------------------------------
 // CARGA DE IMÁGENES
 
 function preload() {
@@ -337,7 +337,7 @@ function preload() {
   mujerPequena = loadImage("k2.png"); // Carga la imagen correspondiente al estado corporal desanimado
 }
 
-// =====================================================
+// ------------------------------------------------------
 // CONFIGURACIÓN INICIAL
 
 function setup() {
@@ -359,7 +359,7 @@ function setup() {
   }
 }
 
-// =====================================================
+// ------------------------------------------------------
 // DRAW
 
 function draw() {
@@ -386,7 +386,7 @@ function draw() {
   }
 }
 
-// =====================================================
+// ------------------------------------------------------
 // PANTALLA INICIO
 
 function pantallaInicio() {
@@ -415,7 +415,7 @@ function pantallaInicio() {
   pop();
 }
 
-// =====================================================
+// ------------------------------------------------------
 // PANTALLA INSTRUCCIONES
 
 function pantallaInstrucciones() {
@@ -431,12 +431,12 @@ function pantallaInstrucciones() {
 
   // Configuraciones del texto
   push();
-  textAlign(LEFT, TOP); // Alinea el texto hacia la izquierda
+  textAlign(CENTER, TOP); // Alinea el texto hacia la izquierda y el top es la parte superior
   fill(255);
   textSize(constrain(width * 0.027, 14, 22)); // Ajusta el tamaño del texto de manera responsiva
   text(
     "∘ Mueva el mouse hacia la derecha\npara aumentar la presión.\n\n∘ Mueva el mouse hacia la izquierda\npara disminuir la presión.\n\n∘ Presione la tecla R para reiniciar.",
-    width * 0.29,
+    width / 2,
     height * 0.35
   );
   pop();
@@ -447,7 +447,7 @@ function pantallaInstrucciones() {
   pop();
 }
 
-// =====================================================
+// ------------------------------------------------------
 // BOTÓN
 
 function dibujarBoton(textoBoton) {
@@ -474,7 +474,7 @@ function dibujarBoton(textoBoton) {
   text(textoBoton, width / 2, botonY + botonAlto / 2); // Dibuja el texto centrado dentro del botón
 }
 
-// =====================================================
+// ------------------------------------------------------
 // CLICK BOTONES
 
 function mousePressed() {
@@ -496,7 +496,7 @@ function mousePressed() {
   }
 }
 
-// =====================================================
+// ------------------------------------------------------
 // TECLADO
 
 function keyPressed() {
@@ -507,7 +507,7 @@ function keyPressed() {
   }
 }
 
-// =====================================================
+// ------------------------------------------------------
 // RESET
 
 function reiniciar() {
@@ -524,7 +524,7 @@ function reiniciar() {
   }
 }
 
-// =====================================================
+// ------------------------------------------------------
 // PRESIÓN
 
 function actualizarPresion() {
@@ -545,7 +545,7 @@ function actualizarPresion() {
   }
 }
 
-// =====================================================
+// ------------------------------------------------------
 // TRANSFORMACIÓN
 
 // Transformación del tamaño de las imágenes
@@ -561,7 +561,7 @@ function dibujarTransformacion() {
   push();
   translate(width * 0.3, height * 0.68 + movimientoY); // Permite trasladar la figura a otra coordenada
   rotate(sin(frameCount * 0.02) * 0.03); // Permite rotar la figura de forma orgánica y mas suave
-  scale(escalaGrande); // Permite cambiar el tamaño de la imagen
+  scale(escalaGrande * 1.5); // Permite cambiar el tamaño de la imagen
   tint(255, 230); // Permite aplicar transparencia o color a una iamgen
   image(mujerGrande, 0, 0, 160, 350); // Permite "llamar" a la imagen inscrita antes del setup
   pop();
@@ -574,13 +574,13 @@ function dibujarTransformacion() {
   // Mujer triste(Derecha)
   push();
   translate(width * 0.7, height * 0.58 - movimientoY);
-  scale(escalaTriste);
+  scale(escalaTriste * 1.7);
   rotate(sin(frameCount * 0.04) * 0.02);
   image(mujerPequena, 0, 0, 220, 300);
   pop();
 }
 
-// =====================================================
+// ------------------------------------------------------
 // BURBUJA
 
 // Nube / Burbuja que se produce al sobrepensar debido a todo el estrés externo que las espectativas producen
@@ -616,19 +616,19 @@ function dibujarBurbuja() {
   }
 }
 
-// =====================================================
+// ------------------------------------------------------
 // PARTÍCULAS
 
 function dibujarParticulas() {
   // Dibuja y actualiza todas las partículas del entorno
   for (let p of particulas) {
-    // Recorre cada partícula almacenada en el arreglo
+    // Recorre cada partícula almacenada en el array
     p.mostrar(); // Dibuja visualmente la partícula
     p.mover(); // Actualiza su posición para generar movimiento
   }
 }
 
-// =====================================================
+// ------------------------------------------------------
 // FONDO
 
 function dibujarFondo() {
@@ -659,7 +659,7 @@ function dibujarFondo() {
   ellipse(width * 0.75, height * 0.6, width * 0.02);
 }
 
-// =====================================================
+// ------------------------------------------------------
 // TEXTOS
 
 function dibujarTexto() {
@@ -688,7 +688,7 @@ function dibujarTexto() {
   line(width - 20, height - 20, width - 20, height - 80);
 }
 
-// =====================================================
+// ------------------------------------------------------
 // LIENZO RESPONSIVO
 
 function windowResized() {
@@ -698,6 +698,5 @@ function windowResized() {
   botonX = width / 2 - botonAncho / 2; // Recalcula la posición horizontal del botón para mantenerlo centrado
   botonY = height * 0.75; // Recalcula la posición vertical del botón
 }
-
 ```
 
